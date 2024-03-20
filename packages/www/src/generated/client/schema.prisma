@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../src/generated/client"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Todo {
+    id      Int    @id @default(autoincrement())
+    status  Int    @default(1) // 1-created 2-pending 3-finished 4-abandoned 5-removed
+    title   String
+    content String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
